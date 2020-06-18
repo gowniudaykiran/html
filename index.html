@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <style>
+        #steps
+        {
+            border: 2px solid blue;
+            line-height: 200%;
+            
+        }
+
+        #dis
+        {
+            font-size: 20px;
+            
+            margin-left: 30%;
+        }
+        
+
+        #d1
+        {
+            border: 2px solid black;
+            margin-left:20%;
+            min-width:80px;
+           
+        }
+        #d2
+        {
+            border: 2px solid black;
+            min-width: 80px;
+            margin-left:25%;
+        }
+        .active
+        {
+            background-color:rgba(6, 236, 186, 0.938) ;
+        }
+        .act
+        {
+         background-color:rgba(6, 236, 186, 0.938);
+         color: white;
+        }
+        @media only screen and (max-width: 900px) {
+            #dis
+            {
+                text-align: center;
+
+                margin-left: auto;
+            }
+            #d1,#d2
+            {
+                display: block;  
+            }
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(202, 235, 235);">
+    <div class="container">
+        <br>
+        <ul class="nav nav-pills nav-justified mb-5" role="tablist">
+            <li class="nav-item">
+                <a class="btn nav-link active">Dota</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn nav-link">Pubg</a>
+            </li>
+            <li class=" nav-item">
+                <a class="btn nav-link">CS</a>
+            </li>
+            <li class=" nav-item">
+                <a class="btn nav-link">TOD</a>
+            </li>
+        </ul>
+        <br>
+        <div class="row">
+            <div id="steps" class="col-lg-3 col-sm-6 mt-4 p-2 pr-3">
+                <center><h4>Steps</h4></center><hr>
+                <div id="Dota" style="display: block;">
+                    <ol>
+                        <li><a class='Dota btn'>Game Finding</a></li>
+                        <li><a class='Dota btn'>Hero Selection</a></li>
+                        <li><a class='Dota btn'>Farm</a></li>
+                        <li><a class='Dota btn'>Fight</a></li>
+                        <li><a class='Dota btn'>Win</a></li>
+                    </ol>
+                </div>
+                    <div id="Pubg" style="display:none">
+                        <ol  >
+                            <li ><a class='Pubg btn'>Make a squad</a></li>
+                            <li><a class='Pubg btn'>Decide a place</a> </li>
+                            <li><a class='Pubg btn'>Get guns</a> </li>
+                            <li><a class='Pubg btn'>Safe in region</a> </li>
+                            <li><a class='Pubg btn'>Chicken dinner</a> </li>
+                        </ol>
+                    </div>
+
+                    <div id="CS" style="display:none">
+                        <ol >
+                            <li><a class='CS btn'>Select a team</a> </li>
+                            <li><a class='CS btn'>Attack</a> </li>
+                            <li><a class='CS btn'>Win</a> </li>
+                        </ol>
+                    </div>
+                <div id="TOD" style="display: none;">
+                    <ol >
+                        <li><a class='TOD btn'>Chill</a> </li>
+                        <li><a class='TOD btn'>Repeat</a> </li>
+                    </ol>
+                </div>
+            </div>
+            <div  class="col-lg-9 col-sm-6">
+                <center><h3>Display</h3></center><br>
+                <div id="dis">
+                <i>Process selected:</i><span id="d1" class="pl-3 pr-3 pt-1 pb-1" style="text-align: center;">Dota</span>
+                    <br><br>
+                 <i>Step selected:</i> <span id='d2' class="pl-3 pr-3 pt-1 pb-1" style="min-height: 30px;;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        var games=document.getElementsByClassName('nav-link')
+        
+        for (var i = 0; i < games.length; i++) {
+          games[i].addEventListener("click",function()
+
+          {
+                var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+            for(var j = 0; j < games.length; j++)
+            {
+                if(games[j].innerHTML==this.innerHTML)
+                {
+                    document.getElementById(this.innerHTML).style.display='block';
+                    document.getElementById('d2').innerHTML=""
+                    var str=this.innerHTML+" act"
+                    var act=document.getElementsByClassName('act')
+                    if(act.length>0)
+                    {
+                        var x=document.getElementsByClassName(str);
+                        if(x.length>0)
+                        {
+                            document.getElementById('d2').innerHTML=x[0].innerHTML
+                        }
+                        
+                    }
+                    
+                    
+                }
+                else
+                {
+                    document.getElementById(games[j].innerHTML).style.display='none';
+                }
+            }
+            document.getElementById('d1').innerHTML=this.innerHTML;
+
+        });
+
+        }
+        var par = document.getElementById("steps");
+        var btns = par.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].addEventListener("click", function() {
+          var current = document.getElementsByClassName(" act");
+          if(current.length>0)current[0].className = current[0].className.replace(" act", "");
+          this.className += " act";
+          
+          document.getElementById('d2').innerHTML=this.innerHTML;
+          });
+        }
+     
+
+
+    </script>
+        
+</body>
+
+</html>
